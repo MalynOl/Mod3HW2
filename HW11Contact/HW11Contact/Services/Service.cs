@@ -80,7 +80,7 @@ namespace HW11Contact
             return enContacts;
         }
 
-        public List<Contact> MethodDigitContacts()
+        private List<Contact> MethodDigitContacts()
         {
             string pattern = @"^\d";
 
@@ -89,14 +89,14 @@ namespace HW11Contact
             return contactsDigitList;
         }
 
-        public List<Contact> MethodOtherSymbol(string pattern)
+        private List<Contact> MethodOtherSymbol(string pattern)
         {
             List<Contact> contactSymbolList = GetListContactsForPattern(pattern);
 
             return contactSymbolList;
         }
 
-        public List<Contact> GetListContactsForPattern(string pattern)
+        private List<Contact> GetListContactsForPattern(string pattern)
         {
             List<Contact> outputContacs = new List<Contact>();
             try
@@ -122,7 +122,7 @@ namespace HW11Contact
             return outputContacs;
         }
 
-        public Dictionary<string, List<Contact>> AddToDictionary(List<Contact> contacts)
+        private Dictionary<string, List<Contact>> AddToDictionary(List<Contact> contacts)
         {
             Dictionary<string, List<Contact>> cultureDictionary = new Dictionary<string, List<Contact>>();
 
