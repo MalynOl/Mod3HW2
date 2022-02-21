@@ -17,65 +17,40 @@ namespace HW11Contact
 
         public GetAllContacts AllContacts { get; init; }
 
-        public Dictionary<string, List<Contact>> MethodUK() // [А-ЯҐЄІЇ]
+        public Dictionary<string, List<Contact>> MethodGeneral(string patternLanguage, string patternOther)
         {
-            string patternUK = @"[А-ЯҐЄІЇа-яґєії]";
+            List<Contact> contactsList = GetListContactsForPattern(patternLanguage);
 
-            List<Contact> contactsUKList = GetListContactsForPattern(patternUK);
-
-            Dictionary<string, List<Contact>> ukContacts = AddToDictionary(contactsUKList);
+            Dictionary<string, List<Contact>> contacts = AddToDictionary(contactsList);
 
             List<Contact> contactsDigitList = MethodDigitContacts();
 
-            ukContacts.Add("[0-9]", contactsDigitList);
-
-            string patternOther = @"\W|[a-zA-Z]";
+            contacts.Add("[0-9]", contactsDigitList);
 
             List<Contact> contactsOtherSymbolList = MethodOtherSymbol(patternOther);
 
-            ukContacts.Add("#", contactsOtherSymbolList);
+            contacts.Add("#", contactsOtherSymbolList);
+
+            return contacts;
+        }
+
+        public Dictionary<string, List<Contact>> MethodUK()
+        {
+            Dictionary<string, List<Contact>> ukContacts = MethodGeneral(@"[А-ЯҐЄІЇа-яґєії]", @"\W|[a-zA-Z]");
 
             return ukContacts;
         }
 
         public Dictionary<string, List<Contact>> MethodRU()
         {
-            string patternRU = @"[А-Яа-я]";
-
-            List<Contact> contactsRUList = GetListContactsForPattern(patternRU);
-
-            Dictionary<string, List<Contact>> ruContacts = AddToDictionary(contactsRUList);
-
-            List<Contact> contactsDigitList = MethodDigitContacts();
-
-            ruContacts.Add("[0-9]", contactsDigitList);
-
-            string patternOther = @"\W|[a-zA-ZҐЄІЇ]";
-
-            List<Contact> contactsOtherSymbolList = MethodOtherSymbol(patternOther);
-
-            ruContacts.Add("#", contactsOtherSymbolList);
+            Dictionary<string, List<Contact>> ruContacts = MethodGeneral(@"[А-Яа-я]", @"\W|[a-zA-ZҐЄІЇ]");
 
             return ruContacts;
         }
 
         public Dictionary<string, List<Contact>> MethodEN()
         {
-            string patternEn = @"[a-zA-Z]";
-
-            List<Contact> contactsENList = GetListContactsForPattern(patternEn);
-
-            Dictionary<string, List<Contact>> enContacts = AddToDictionary(contactsENList);
-
-            List<Contact> contactsDigitList = MethodDigitContacts();
-
-            enContacts.Add("[0-9]", contactsDigitList);
-
-            string patternOther = @"\W|[А-ЯҐЄІЇ]";
-
-            List<Contact> contactsOtherSymbolList = MethodOtherSymbol(patternOther);
-
-            enContacts.Add("#", contactsOtherSymbolList);
+            Dictionary<string, List<Contact>> enContacts = MethodGeneral(@"[a-zA-Z]", @"\W|[А-ЯҐЄІЇ]");
 
             return enContacts;
         }
